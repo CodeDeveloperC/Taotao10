@@ -28,5 +28,6 @@
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.16" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:servlet-api:2.5" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:jsp-api:2.0" level="project" />
+    <orderEntry type="library" name="Maven: fastdfs_client:fastdfs_client:1.25" level="project" />
   </component>
 </module>
