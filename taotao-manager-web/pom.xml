@@ -91,8 +91,6 @@
     <build>
 
         <finalName>taotao-manager-web</finalName>
-
     </build>
-
 
 </project>
