@@ -13,6 +13,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 /**
@@ -65,5 +66,10 @@ public class HttpClient {
 
         response.close();
         httpClient.close();
+    }
+
+    @Test
+    public void testURLencode() throws Exception{
+        System.out.println(URLEncoder.encode("³ÂÎ°","utf-8"));
     }
 }

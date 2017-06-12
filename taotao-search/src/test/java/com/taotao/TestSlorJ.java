@@ -1,6 +1,7 @@
 package com.taotao;
 
 import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.impl.CloudSolrServer;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
@@ -45,5 +46,18 @@ public class TestSlorJ {
             System.out.println(solrDocument.get("item_title"));
             System.out.println(solrDocument.get("item_sell_point"));
         }
+    }
+
+    @Test
+    public void testSolrCloud() throws Exception{
+        CloudSolrServer solrServer = new CloudSolrServer("192.168.59.128:2181,192.168.59.128:2182,192.168.59.128:2183");
+        solrServer.setDefaultCollection("collection2");
+
+        SolrInputDocument document = new SolrInputDocument();
+        document.addField("id", "陈伟");
+        document.addField("item_title", "陈伟1");
+
+        solrServer.add(document);
+        solrServer.commit();
     }
 }

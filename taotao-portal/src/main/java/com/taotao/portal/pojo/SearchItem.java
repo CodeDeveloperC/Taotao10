@@ -50,6 +50,10 @@ public class SearchItem {
     }
 
     public String getImage() {
+        if (image != null && !image.equals("")) {
+            String[] strings = image.split(",");
+            return strings[0];
+        }
         return image;
     }
 
