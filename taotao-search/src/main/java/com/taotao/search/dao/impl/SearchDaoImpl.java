@@ -44,13 +44,15 @@ public class SearchDaoImpl implements SearchDao {
             item.setPrice((Long) solrDocument.get("item_price"));
             item.setSell_point((String) solrDocument.get("item_sell_point"));
 
+            System.out.println("------------item.getId()" + item.getId());
+
             //取高亮
             Map<String, Map<String, List<String>>> highlighting = response.getHighlighting();
             List<String> list = highlighting.get(solrDocument.get("id")).get("item_title");
             String itemTitle = "";
             if (list != null && list.size() > 0) {
                 itemTitle = list.get(0);
-            }else {
+            } else {
                 itemTitle = (String) solrDocument.get("item_title");
             }
             item.setTitle(itemTitle);
