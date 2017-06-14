@@ -28,7 +28,10 @@ public class SearchController {
                                @RequestParam(defaultValue = "1") Integer page,
                                @RequestParam(defaultValue = "30") Integer rows) {
         try {
-            keyword = new String(keyword.getBytes("iso8859-1"), "utf-8");
+
+            System.out.println(keyword);
+          //  keyword = new String(keyword.getBytes("iso8859-1"), "utf-8");
+         //   keyword = URLDecoder.decode(keyword , "utf-8");
             SearchResult search = searchService.search(keyword, page, rows);
             return TaotaoResult.ok(search);
         } catch (Exception e) {

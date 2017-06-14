@@ -56,14 +56,18 @@ public class RegisterServiceImpl implements RegisterService {
             return TaotaoResult.build(400, "用户名已经注册");
         }
 
-        TaotaoResult taotaoResult2 = checkData(user.getPhone(), 2);
-        if (!(boolean)taotaoResult2.getData()) {
-            return TaotaoResult.build(400, "电话已经注册");
+        if(user.getPassword()!=null){
+            TaotaoResult taotaoResult2 = checkData(user.getPhone(), 2);
+            if (!(boolean)taotaoResult2.getData()) {
+                return TaotaoResult.build(400, "电话已经注册");
+            }
         }
 
-        TaotaoResult taotaoResult3 = checkData(user.getEmail(), 3);
-        if (!(boolean)taotaoResult3.getData()) {
-            return TaotaoResult.build(400, "邮箱已经注册");
+        if (user.getEmail() != null) {
+            TaotaoResult taotaoResult3 = checkData(user.getEmail(), 3);
+            if (!(boolean)taotaoResult3.getData()) {
+                return TaotaoResult.build(400, "邮箱已经注册");
+            }
         }
 
         //补全日期数据
