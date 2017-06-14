@@ -2,6 +2,7 @@
 <project version="4">
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/taotao-manager-web" />
+    <file type="web" url="file://$PROJECT_DIR$/taotao-order" />
     <file type="web" url="file://$PROJECT_DIR$/taotao-portal" />
     <file type="web" url="file://$PROJECT_DIR$/taotao-rest" />
     <file type="web" url="file://$PROJECT_DIR$/taotao-search" />
@@ -17,6 +18,7 @@
         <option value="$PROJECT_DIR$/taotao-portal/pom.xml" />
         <option value="$PROJECT_DIR$/taotao-search/pom.xml" />
         <option value="$PROJECT_DIR$/taotao-sso/pom.xml" />
+        <option value="$PROJECT_DIR$/taotao-order/pom.xml" />
       </list>
     </option>
   </component>
