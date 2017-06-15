@@ -1,6 +1,6 @@
 package com.taotao.jedis;
 
-import com.taotao.rest.component.JetisClient;
+import com.taotao.rest.component.JedisClient;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -69,10 +69,10 @@ public class JedisTest {
     @Test
     public void testJedisClientSpring() throws Exception{
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-*.xml");
-        JetisClient jetisClient = applicationContext.getBean(JetisClient.class);
+        JedisClient jedisClient = applicationContext.getBean(JedisClient.class);
 
-        jetisClient.set("client1", "1000");
-        String client1 = jetisClient.get("client1");
+        jedisClient.set("client1", "1000");
+        String client1 = jedisClient.get("client1");
         System.out.println(client1);
     }
 }

@@ -32,6 +32,8 @@ public class LoginInterceptor implements HandlerInterceptor{
             return false;
         }
 
+        httpServletRequest.setAttribute("user",user);
+
         //放行
         return true;
     }

@@ -1,6 +1,6 @@
-package com.taotao.rest.component.impl;
+package com.taotao.order.component.impl;
 
-import com.taotao.rest.component.JetisClient;
+import com.taotao.order.component.JedisClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -12,7 +12,7 @@ import redis.clients.jedis.JedisPool;
  * @Author: 司马懿
  * @data: 2017/6/10.
  */
-public class JetisClientSingle implements JetisClient {
+public class JedisClientSingle implements JedisClient {
     @Autowired
     private JedisPool jedisPool;
 

@@ -7,7 +7,7 @@ package com.taotao.rest.component;
  * @Author: 司马懿
  * @data: 2017/6/10.
  */
-public interface JetisClient {
+public interface JedisClient {
     String set(String key, String value);
 
     String get(String key);

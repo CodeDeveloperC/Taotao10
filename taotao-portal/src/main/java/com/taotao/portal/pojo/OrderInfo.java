@@ -1,4 +1,4 @@
-package com.taotao.order.pojo;
+package com.taotao.portal.pojo;
 
 import com.taotao.pojo.TbOrder;
 import com.taotao.pojo.TbOrderItem;

@@ -53,7 +53,7 @@
         <!--</constructor-arg>-->
     <!--</bean>-->
 
-    <!--<bean class="com.taotao.rest.component.impl.JetisClientCluster" id="jetisClientCluster"/>-->
+    <!--<bean clacom.taotao.rest.component.impl.JedisClientClusterster" id="jetisClientCluster"/>-->
 
 
 

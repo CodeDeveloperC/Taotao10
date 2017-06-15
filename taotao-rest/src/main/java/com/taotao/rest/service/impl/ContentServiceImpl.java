@@ -6,7 +6,7 @@ import com.taotao.common.utils.JsonUtils;
 import com.taotao.mapper.TbContentMapper;
 import com.taotao.pojo.TbContent;
 import com.taotao.pojo.TbContentExample;
-import com.taotao.rest.component.JetisClient;
+import com.taotao.rest.component.JedisClient;
 import com.taotao.rest.service.ContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,7 +26,7 @@ public class ContentServiceImpl implements ContentService {
     @Autowired
     private TbContentMapper contentMapper;
     @Autowired
-    private JetisClient jetisClient;
+    private JedisClient jedisClient;
     @Value("${REDIS_CONTENT_KEY}")
     private String REDIS_CONTENT_KEY;
     @Override
@@ -34,7 +34,7 @@ public class ContentServiceImpl implements ContentService {
 
         //首先查找缓存
         try {
-            String json = jetisClient.hget(REDIS_CONTENT_KEY, cid + "");
+            String json = jedisClient.hget(REDIS_CONTENT_KEY, cid + "");
             if (!StringUtils.isEmptyOrWhitespaceOnly(json)) {
                 List<TbContent> contentList = JsonUtils.jsonToList(json, TbContent.class);
                 return contentList;
@@ -52,7 +52,7 @@ public class ContentServiceImpl implements ContentService {
 
         //返回结果前，向缓存中添加数据
         try {
-            jetisClient.hset(REDIS_CONTENT_KEY, cid + "", JsonUtils.objectToJson(list));
+            jedisClient.hset(REDIS_CONTENT_KEY, cid + "", JsonUtils.objectToJson(list));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,7 +62,7 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     public TaotaoResult syncContent(Long cid) {
-        jetisClient.hdel(REDIS_CONTENT_KEY, cid + "");
+        jedisClient.hdel(REDIS_CONTENT_KEY, cid + "");
         return TaotaoResult.ok();
     }
 }

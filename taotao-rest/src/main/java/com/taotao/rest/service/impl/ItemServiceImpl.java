@@ -9,7 +9,7 @@ import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemDesc;
 import com.taotao.pojo.TbItemParamItem;
 import com.taotao.pojo.TbItemParamItemExample;
-import com.taotao.rest.component.JetisClient;
+import com.taotao.rest.component.JedisClient;
 import com.taotao.rest.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,7 +33,7 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     private TbItemParamItemMapper itemParamItemMapper;
     @Autowired
-    private JetisClient jetisClient;
+    private JedisClient jedisClient;
     @Value("${REDIS_ITEM_KEY}")
     private String REDIS_ITEM_KEY;
     @Value("${ITEM_BASE_INFO_KEY}")
@@ -49,7 +49,7 @@ public class ItemServiceImpl implements ItemService {
     public TbItem getTbItemById(Long itemId) {
 
         try {
-            String json = jetisClient.get(REDIS_ITEM_KEY + ":" +itemId  + ":" + ITEM_BASE_INFO_KEY);
+            String json = jedisClient.get(REDIS_ITEM_KEY + ":" +itemId  + ":" + ITEM_BASE_INFO_KEY);
             if (!StringUtils.isNullOrEmpty(json)) {
                 TbItem tbItem = JsonUtils.jsonToPojo(json, TbItem.class);
                 return tbItem;
@@ -62,8 +62,8 @@ public class ItemServiceImpl implements ItemService {
         TbItem tbItem = itemMapper.selectByPrimaryKey(itemId);
 
         try {
-            jetisClient.set(REDIS_ITEM_KEY + ":" +itemId  + ":" + ITEM_BASE_INFO_KEY, JsonUtils.objectToJson(tbItem));
-            jetisClient.expire(REDIS_ITEM_KEY + ":" +itemId  + ":" + ITEM_BASE_INFO_KEY, ITEM_EXPIRE_SECOND);
+            jedisClient.set(REDIS_ITEM_KEY + ":" +itemId  + ":" + ITEM_BASE_INFO_KEY, JsonUtils.objectToJson(tbItem));
+            jedisClient.expire(REDIS_ITEM_KEY + ":" +itemId  + ":" + ITEM_BASE_INFO_KEY, ITEM_EXPIRE_SECOND);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -73,7 +73,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public TbItemDesc getTbItemDescById(Long itemId) {
         try {
-            String json = jetisClient.get(REDIS_ITEM_KEY + ":" +itemId  + ":" + ITEM_DESC_KEY);
+            String json = jedisClient.get(REDIS_ITEM_KEY + ":" +itemId  + ":" + ITEM_DESC_KEY);
             if (!StringUtils.isNullOrEmpty(json)) {
                 TbItemDesc tbItemDesc = JsonUtils.jsonToPojo(json, TbItemDesc.class);
                 return tbItemDesc;
@@ -86,8 +86,8 @@ public class ItemServiceImpl implements ItemService {
         TbItemDesc tbItemDesc = itemDescMapper.selectByPrimaryKey(itemId);
 
         try {
-            jetisClient.set(REDIS_ITEM_KEY + ":" +itemId  + ":" + ITEM_DESC_KEY, JsonUtils.objectToJson(tbItemDesc));
-            jetisClient.expire(REDIS_ITEM_KEY + ":" +itemId  + ":" + ITEM_DESC_KEY, ITEM_EXPIRE_SECOND);
+            jedisClient.set(REDIS_ITEM_KEY + ":" +itemId  + ":" + ITEM_DESC_KEY, JsonUtils.objectToJson(tbItemDesc));
+            jedisClient.expire(REDIS_ITEM_KEY + ":" +itemId  + ":" + ITEM_DESC_KEY, ITEM_EXPIRE_SECOND);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -97,7 +97,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public TbItemParamItem getTbItemParamById(Long itemId) {
         try {
-            String json = jetisClient.get(REDIS_ITEM_KEY + ":" +itemId  + ":" + ITEM_PARAM_KEY);
+            String json = jedisClient.get(REDIS_ITEM_KEY + ":" +itemId  + ":" + ITEM_PARAM_KEY);
             if (!StringUtils.isNullOrEmpty(json)) {
                 TbItemParamItem tbItemParamItem = JsonUtils.jsonToPojo(json, TbItemParamItem.class);
                 return tbItemParamItem;
@@ -114,8 +114,8 @@ public class ItemServiceImpl implements ItemService {
         if (list != null && list.size() > 0) {
             TbItemParamItem tbItemParamItem = list.get(0);
             try {
-                jetisClient.set(REDIS_ITEM_KEY + ":" +itemId  + ":" + ITEM_PARAM_KEY, JsonUtils.objectToJson(tbItemParamItem));
-                jetisClient.expire(REDIS_ITEM_KEY + ":" +itemId  + ":" + ITEM_PARAM_KEY, ITEM_EXPIRE_SECOND);
+                jedisClient.set(REDIS_ITEM_KEY + ":" +itemId  + ":" + ITEM_PARAM_KEY, JsonUtils.objectToJson(tbItemParamItem));
+                jedisClient.expire(REDIS_ITEM_KEY + ":" +itemId  + ":" + ITEM_PARAM_KEY, ITEM_EXPIRE_SECOND);
             } catch (Exception e){
                 e.printStackTrace();
             }

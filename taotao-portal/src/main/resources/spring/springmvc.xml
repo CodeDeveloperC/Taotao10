@@ -17,12 +17,12 @@
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-    <!--<mvc:interceptors>-->
-        <!--<mvc:interceptor>-->
-            <!--&lt;!&ndash;<mvc:mapping path="/order/**"/>&ndash;&gt;-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/order/**"/>
             <!--<mvc:mapping path="/item/**"/>-->
-            <!--<bean class="com.taotao.portal.LoginInterceptor"/>-->
-        <!--</mvc:interceptor>-->
+            <bean class="com.taotao.portal.LoginInterceptor"/>
+        </mvc:interceptor>
 
-    <!--</mvc:interceptors>-->
+    </mvc:interceptors>
 </beans>
